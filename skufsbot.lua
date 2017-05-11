@@ -2,8 +2,6 @@ local discordia = require("discordia")
 local client = discordia.Client()
 local token = require("../token")
 local http = require("coro-http")
-dofile("libs/xml.lua")
-dofile("libs/handler.lua")
 
 local xml = xmlParser(simpleTreeHandler())
 
