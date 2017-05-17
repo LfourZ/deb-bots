@@ -20,10 +20,11 @@ client:on("messageCreate", function(message)
 	cmd = cmd:sub(2)
 	if not _G.dcmd[cmd] then return end
 	if _G.dcmd[cmd].cmd ~= nil then
-		if not cd[message.guild.id] then cd[message.guild.id] = {} end
-		if not cd[message.guild.id][cmd] then cd[message.guild.id][cmd] = 0 end
-		if cd[message.guild.id][cmd] > os.time() then return end
-		if _G.dcmd[cmd].cd then cd[message.guild.id][cmd] = os.time() + _G.dcmd[cmd].cd end
+		if not cd[message.channel.id] then cd[message.channel.id] = {} end
+		if not cd[message.channel.id][cmd] then cd[message.channel.id][cmd] = 0 end
+
+		if cd[message.channel.id][cmd] > os.time() then return end
+		if _G.dcmd[cmd].cd then cd[message.channel.id][cmd] = os.time() + _G.dcmd[cmd].cd end
 		local sentMsg = _G.dcmd[cmd].cmd(message)
 		if sentMsg and _G.dcmd[cmd].cd then
 			timer.setTimeout(_G.dcmd[cmd].cd * 1000, coroutine.wrap(sentMsg.delete), sentMsg)

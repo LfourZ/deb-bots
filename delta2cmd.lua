@@ -79,7 +79,9 @@ cmd.servers = {
 		for k, v in pairs(data.serverlist.server) do
 			sstr=sstr.."`"..id[tonumber(v.id)]..": "..v.act.."/"..v.max.."` [Click to join](steam://connect/"..v.addr..":"..v.port..")\n"
 		end
-		message:delete()
+		if not message.channel.isPrivate then
+			message:delete()
+		end
 		return message:reply({embed={
 			title="Serverlist",
 			color="16711680",
